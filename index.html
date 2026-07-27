@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>giftsie — Shop small. Gift beautifully. Support local. | Union Station, Washington DC</title>
+<meta name="description" content="giftsie is a modern boutique gift shop in Union Station, Washington DC, curating handmade gifts from independent artists and small businesses across DC, Maryland & Virginia.">
+<link rel="icon" href="images/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   GIFTSIE DESIGN SYSTEM
+   Palette derived from shop photography:
+   kraft bags, cream walls, white pegboard trim, brass details
+   ============================================================ */
+:root{
+  --tan:        #C7AE97;   /* logo tan */
+  --kraft:      #C1935F;   /* kraft bag */
+  --kraft-deep: #A87A4A;
+  --cream:      #F7F2EA;   /* shop walls */
+  --ivory:      #FFFDF8;
+  --white:      #FFFFFF;   /* pegboard trim */
+  --ink:        #2B2622;   /* storefront steel */
+  --ink-soft:   #6B5F53;
+  --brass:      #A8823C;   /* jewelry brass */
+  --sea:        #AFCFD4;   /* sea-glass accent */
+  --shadow: 0 18px 50px -18px rgba(43,38,34,.22);
+  --radius: 18px;
+  --arch: 999px 999px 18px 18px;
+  --ease: cubic-bezier(.22,.8,.32,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Poppins',sans-serif;font-weight:300;color:var(--ink);background:var(--ivory);line-height:1.7;font-size:clamp(14.5px,1.5vw,16px);overflow-x:hidden}
+h1,h2,h3,p,a{overflow-wrap:break-word}
+
+/* two-column split rows that collapse on small screens */
+.split2{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,56px);align-items:center}
+.split2.top{align-items:start}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{font-family:'Fraunces',serif;font-weight:400;line-height:1.15}
+.serif-i{font-family:'Fraunces',serif;font-style:italic}
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+
+/* pegboard motif — echoes the white pegboard walls in-store */
+.pegboard{background-image:radial-gradient(rgba(43,38,34,.10) 1.6px, transparent 1.6px);background-size:24px 24px}
+
+/* ---------- announcement bar ---------- */
+.announce{background:var(--ink);color:var(--cream);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;text-align:center;padding:9px 16px}
+.announce b{color:var(--tan);font-weight:500}
+
+/* ---------- header ---------- */
+header{position:sticky;top:0;z-index:50;background:rgba(255,253,248,.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(43,38,34,.08)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:76px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand img{width:44px;height:44px;border-radius:10px}
+.brand-word{font-family:'Poppins',sans-serif;font-weight:300;font-size:27px;letter-spacing:.32em;color:var(--ink)}
+.nav-links{display:flex;gap:34px;list-style:none}
+.nav-links a{font-size:13.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-soft);padding:6px 0;border-bottom:2px solid transparent;transition:all .25s var(--ease)}
+.nav-links a:hover,.nav-links a.active{color:var(--ink);border-color:var(--kraft)}
+.nav-cta{display:flex;align-items:center;gap:14px}
+.cart-btn{position:relative;display:flex;align-items:center;gap:8px;background:var(--ink);color:var(--cream);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;padding:11px 20px;border-radius:999px;border:none;cursor:pointer;font-family:inherit;transition:background .25s}
+.cart-btn:hover{background:var(--kraft-deep)}
+.burger{display:none;background:none;border:none;font-size:26px;cursor:pointer;color:var(--ink)}
+
+/* ---------- page switching ---------- */
+.page{display:none}
+.page.active{display:block;animation:fadeUp .5s var(--ease)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-block;padding:15px 34px;border-radius:999px;font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:400;cursor:pointer;border:1.5px solid var(--ink);transition:all .3s var(--ease);font-family:inherit}
+.btn-solid{background:var(--ink);color:var(--cream)}
+.btn-solid:hover{background:var(--kraft-deep);border-color:var(--kraft-deep)}
+.btn-ghost{background:transparent;color:var(--ink)}
+.btn-ghost:hover{background:var(--ink);color:var(--cream)}
+.btn-kraft{background:var(--kraft);border-color:var(--kraft);color:var(--ivory)}
+.btn-kraft:hover{background:var(--kraft-deep);border-color:var(--kraft-deep)}
+
+/* ---------- section scaffolding ---------- */
+section{padding:88px 0}
+.kicker{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--kraft-deep);font-weight:500;margin-bottom:14px}
+.h-lg{font-size:clamp(34px,4.6vw,56px)}
+.h-md{font-size:clamp(27px,3.2vw,38px)}
+.lede{color:var(--ink-soft);max-width:640px;font-size:17.5px}
+.center{text-align:center}
+.center .lede{margin:0 auto}
+
+/* ---------- hero ---------- */
+.hero{background:var(--cream);position:relative;overflow:hidden;padding:96px 0 110px}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center}
+.hero h1{font-size:clamp(40px,5.4vw,68px);margin:18px 0 22px}
+.hero h1 em{font-style:italic;color:var(--kraft-deep)}
+.hero-ctas{display:flex;gap:16px;margin-top:34px;flex-wrap:wrap}
+.hero-art{position:relative}
+.hero-art .arch{border-radius:var(--arch);overflow:hidden;box-shadow:var(--shadow);border:10px solid var(--white)}
+.hero-art .arch img{width:100%;aspect-ratio:4/5;object-fit:cover}
+.hero-badge{position:absolute;bottom:26px;left:-26px;background:var(--ivory);border-radius:14px;box-shadow:var(--shadow);padding:16px 22px;font-size:13.5px;line-height:1.5}
+.hero-badge b{font-weight:500;display:block}
+.hero-peg{position:absolute;inset:auto -140px -140px auto;width:420px;height:420px;border-radius:50%;opacity:.5}
+
+/* ---------- stat strip ---------- */
+.stats{background:var(--ink);color:var(--cream);padding:44px 0}
+.stats .wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:28px;text-align:center}
+.stat b{font-family:'Fraunces',serif;font-weight:400;font-size:34px;display:block;color:var(--tan)}
+.stat span{font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;opacity:.75}
+
+/* ---------- synergy band ---------- */
+.synergy{background:var(--ivory)}
+.syn-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:28px;margin-top:52px}
+.syn-card{background:var(--cream);border-radius:var(--radius);padding:38px 32px;position:relative;transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
+.syn-card:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+.syn-num{font-family:'Fraunces',serif;font-style:italic;font-size:52px;color:var(--kraft);line-height:1}
+.syn-card h3{font-size:21px;margin:16px 0 10px}
+.syn-card p{font-size:14.5px;color:var(--ink-soft)}
+.syn-arrow{position:absolute;top:42px;right:-22px;font-size:22px;color:var(--kraft);z-index:2}
+
+/* ---------- product cards ---------- */
+.prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(230px,100%),1fr));gap:clamp(16px,2.4vw,26px);margin-top:48px}
+.prod{background:var(--white);border-radius:var(--radius);overflow:hidden;box-shadow:0 6px 24px -12px rgba(43,38,34,.16);transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
+.prod:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+.prod-img{position:relative;aspect-ratio:1;overflow:hidden;background:var(--cream)}
+.prod-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+.prod:hover .prod-img img{transform:scale(1.05)}
+.prod-tag{position:absolute;top:12px;left:12px;background:rgba(255,253,248,.94);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;padding:5px 11px;border-radius:999px;color:var(--kraft-deep);font-weight:500}
+.prod-body{padding:18px 20px 22px}
+.prod-body h3{font-size:17px;font-family:'Poppins',sans-serif;font-weight:400}
+.prod-maker{font-size:12.5px;color:var(--ink-soft);margin:3px 0 10px}
+.prod-maker a{color:var(--kraft-deep);border-bottom:1px solid rgba(168,122,74,.4)}
+.prod-maker a:hover{border-color:var(--kraft-deep)}
+.prod-foot{display:flex;align-items:center;justify-content:space-between}
+.price{font-weight:500;font-size:16.5px}
+.mini-add{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--ink);border-radius:999px;padding:7px 14px;background:none;cursor:pointer;font-family:inherit;transition:all .25s}
+.mini-add:hover{background:var(--ink);color:var(--cream)}
+.support-note{background:var(--cream);border-left:3px solid var(--kraft);font-size:12px;color:var(--ink-soft);padding:8px 12px;border-radius:0 8px 8px 0;margin-top:12px}
+
+/* ---------- maker cards ---------- */
+.maker-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(280px,100%),1fr));gap:clamp(18px,2.4vw,28px);margin-top:48px}
+.maker-card{background:var(--white);border-radius:var(--radius);overflow:hidden;box-shadow:0 6px 24px -12px rgba(43,38,34,.16);transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
+.maker-card:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+.maker-img{aspect-ratio:4/3;overflow:hidden;background:var(--cream)}
+.maker-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+.maker-card:hover .maker-img img{transform:scale(1.04)}
+.maker-body{padding:26px 26px 30px}
+.maker-loc{font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--kraft-deep);font-weight:500}
+.maker-body h3{font-size:22px;margin:8px 0 10px}
+.maker-body p{font-size:14.5px;color:var(--ink-soft)}
+.maker-link{display:inline-block;margin-top:16px;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;border-bottom:1.5px solid var(--kraft);padding-bottom:3px;transition:color .25s}
+.maker-link:hover{color:var(--kraft-deep)}
+.maker-card.template{border:2px dashed var(--tan);background:var(--cream);box-shadow:none;display:flex;align-items:center;justify-content:center;min-height:380px}
+.maker-card.template .inner{text-align:center;padding:40px}
+.maker-card.template .plus{font-size:44px;color:var(--kraft);font-family:'Fraunces',serif;line-height:1}
+.maker-card.template h3{font-size:20px;margin:14px 0 8px}
+.maker-card.template p{font-size:13.5px;color:var(--ink-soft)}
+
+/* ---------- catalog ---------- */
+.cat-head{background:var(--cream);padding:72px 0 40px}
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-top:30px}
+.chip{border:1.5px solid rgba(43,38,34,.25);background:var(--ivory);border-radius:999px;padding:9px 20px;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;font-family:inherit;transition:all .25s}
+.chip:hover{border-color:var(--ink)}
+.chip.active{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+.sync-note{display:flex;gap:14px;align-items:flex-start;background:var(--white);border:1px solid rgba(168,122,74,.35);border-radius:14px;padding:18px 22px;margin-top:34px;font-size:13.5px;color:var(--ink-soft)}
+.sync-dot{width:9px;height:9px;border-radius:50%;background:#7BA05B;margin-top:7px;flex-shrink:0;box-shadow:0 0 0 4px rgba(123,160,91,.18)}
+.sync-note b{color:var(--ink);font-weight:500}
+
+/* ---------- gallery ---------- */
+.gal-grid{columns:3;column-gap:22px;margin-top:48px}
+.gal-item{break-inside:avoid;margin-bottom:22px;border-radius:var(--radius);overflow:hidden;position:relative;box-shadow:0 6px 24px -12px rgba(43,38,34,.18)}
+.gal-item img{width:100%;transition:transform .6s var(--ease)}
+.gal-item:hover img{transform:scale(1.04)}
+.gal-cap{position:absolute;inset:auto 0 0 0;background:linear-gradient(transparent,rgba(43,38,34,.72));color:var(--cream);font-size:13px;padding:34px 18px 14px;opacity:0;transition:opacity .35s}
+.gal-item:hover .gal-cap{opacity:1}
+
+/* ---------- story ---------- */
+.story-hero{background:var(--cream);padding:88px 0}
+.story-hero .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:64px;align-items:center}
+.story-hero .arch{border-radius:var(--arch);overflow:hidden;border:10px solid var(--white);box-shadow:var(--shadow)}
+.story-hero .arch img{width:100%;aspect-ratio:4/5;object-fit:cover}
+.pullquote{font-family:'Fraunces',serif;font-style:italic;font-size:clamp(22px,2.6vw,30px);line-height:1.5;color:var(--kraft-deep);border-left:3px solid var(--kraft);padding-left:26px;margin:34px 0}
+.story-body{max-width:720px;margin:0 auto}
+.story-body p{margin-bottom:22px;font-size:16.5px;color:var(--ink-soft)}
+.story-body p:first-of-type::first-letter{font-family:'Fraunces',serif;font-size:64px;float:left;line-height:.85;padding:6px 12px 0 0;color:var(--kraft)}
+
+/* ---------- contact ---------- */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;margin-top:52px}
+.info-block{margin-bottom:30px}
+.info-block h3{font-size:19px;margin-bottom:8px}
+.info-block p{color:var(--ink-soft);font-size:15px}
+.hours{width:100%;font-size:14.5px;color:var(--ink-soft)}
+.hours td{padding:7px 0;border-bottom:1px solid rgba(43,38,34,.08)}
+.hours td:last-child{text-align:right;color:var(--ink)}
+form .field{margin-bottom:18px}
+label{display:block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:7px;color:var(--ink-soft);font-weight:500}
+input,textarea,select{width:100%;padding:14px 16px;border:1.5px solid rgba(43,38,34,.18);border-radius:12px;font-family:inherit;font-size:15px;background:var(--white);color:var(--ink);transition:border .25s}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--kraft)}
+.map-slot{margin-top:36px;border-radius:var(--radius);overflow:hidden;background:var(--cream);border:2px dashed var(--tan);padding:44px;text-align:center;color:var(--ink-soft);font-size:14px}
+
+/* ---------- CTA band / newsletter ---------- */
+.cta-band{background:linear-gradient(120deg,var(--kraft) 0%,var(--kraft-deep) 100%);color:var(--ivory);border-radius:26px;padding:64px 56px;display:grid;grid-template-columns:1.2fr .8fr;gap:44px;align-items:center;position:relative;overflow:hidden}
+.cta-band .pegwhite{position:absolute;inset:0;background-image:radial-gradient(rgba(255,253,248,.16) 1.6px,transparent 1.6px);background-size:24px 24px;pointer-events:none}
+.cta-band h2{font-size:clamp(26px,3vw,38px)}
+.cta-band p{opacity:.9;margin-top:12px;font-size:15.5px}
+.news-form{display:flex;gap:10px}
+.news-form input{border:none;border-radius:999px;padding:16px 22px}
+.news-form .btn{border-color:var(--ivory);background:var(--ivory);color:var(--kraft-deep);white-space:nowrap}
+.news-form .btn:hover{background:var(--ink);border-color:var(--ink);color:var(--cream)}
+.fineprint{font-size:12px;opacity:.75;margin-top:12px}
+
+/* ---------- instagram strip ---------- */
+.ig-strip{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(120px,45%),1fr));gap:12px;margin-top:40px}
+.ig-tile{aspect-ratio:1;border-radius:12px;overflow:hidden;position:relative}
+.ig-tile img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}
+.ig-tile:hover img{transform:scale(1.07)}
+.ig-tile::after{content:'♡';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(43,38,34,.45);color:var(--cream);font-size:26px;opacity:0;transition:opacity .3s}
+.ig-tile:hover::after{opacity:1}
+
+/* ---------- footer ---------- */
+footer{background:var(--ink);color:var(--cream);padding:72px 0 34px;margin-top:96px}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:44px}
+.foot-brand img{width:56px;border-radius:12px;margin-bottom:16px}
+.foot-tag{font-family:'Fraunces',serif;font-style:italic;font-size:17px;color:var(--tan)}
+.foot-grid h4{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--tan);margin-bottom:18px;font-weight:500}
+.foot-grid ul{list-style:none}
+.foot-grid li{margin-bottom:10px}
+.foot-grid a{font-size:14px;opacity:.8;transition:opacity .25s}
+.foot-grid a:hover{opacity:1}
+.socials{display:flex;gap:12px;margin-top:18px}
+.soc{width:40px;height:40px;border:1px solid rgba(247,242,234,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all .3s}
+.soc:hover{background:var(--tan);border-color:var(--tan);color:var(--ink)}
+.soc svg{width:17px;height:17px;fill:currentColor}
+.foot-base{border-top:1px solid rgba(247,242,234,.14);margin-top:52px;padding-top:26px;display:flex;justify-content:space-between;font-size:12.5px;opacity:.65;flex-wrap:wrap;gap:10px}
+
+/* ---------- reveal on scroll ---------- */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+
+/* ============================================================
+   RESPONSIVE — designed to hold together at every viewport,
+   from 320px phones to ultrawide monitors.
+   Grids are auto-fit/auto-fill so they reflow continuously;
+   breakpoints below handle layout shifts & density.
+   ============================================================ */
+
+/* large tablets / small laptops */
+@media(max-width:1080px){
+  .nav-links{gap:22px}
+  .gal-grid{columns:2}
+}
+
+/* tablets & below — stack all split layouts, switch to burger nav */
+@media(max-width:980px){
+  .hero{padding:64px 0 76px}
+  .hero .wrap,.story-hero .wrap,.contact-grid,.cta-band,.split2{grid-template-columns:1fr}
+  .hero-art{max-width:520px;margin:0 auto;width:100%}
+  .story-hero .arch{max-width:440px;margin:0 auto}
+  .syn-arrow{display:none}
+  .nav-links{position:fixed;inset:76px 0 auto 0;background:var(--ivory);flex-direction:column;gap:0;padding:12px 24px 24px;border-bottom:1px solid rgba(43,38,34,.1);display:none;box-shadow:0 20px 30px -20px rgba(43,38,34,.25)}
+  .nav-links.open{display:flex}
+  .nav-links li{padding:4px 0}
+  .nav-links a{display:block;padding:12px 0;font-size:15px}
+  .burger{display:block}
+  .hero-badge{left:10px;bottom:14px}
+  .foot-grid{grid-template-columns:1fr 1fr;gap:36px}
+}
+
+/* large phones */
+@media(max-width:700px){
+  section{padding:60px 0}
+  .wrap{padding:0 18px}
+  .announce{font-size:10.5px;letter-spacing:.1em;padding:8px 12px}
+  .nav{height:66px}
+  .nav-links{inset:66px 0 auto 0}
+  .brand img{width:38px;height:38px}
+  .brand-word{font-size:22px;letter-spacing:.24em}
+  .cart-btn{padding:9px 15px;font-size:11.5px}
+  .filters{overflow-x:auto;flex-wrap:nowrap;padding-bottom:8px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .filters::-webkit-scrollbar{display:none}
+  .chip{white-space:nowrap;flex-shrink:0}
+  .cta-band{padding:44px 28px;border-radius:20px}
+  .hours{font-size:13.5px}
+  .story-body p:first-of-type::first-letter{font-size:52px}
+}
+
+/* small phones */
+@media(max-width:560px){
+  .gal-grid{columns:1}
+  .news-form{flex-direction:column}
+  .news-form .btn{width:100%}
+  .hero-ctas .btn{width:100%;text-align:center}
+  .hero-badge{position:static;margin-top:14px;display:inline-block}
+  .btn{padding:14px 26px}
+  .foot-grid{grid-template-columns:1fr;gap:32px}
+  .foot-base{flex-direction:column;text-align:center}
+  .stats .wrap{grid-template-columns:1fr 1fr;gap:20px}
+  .stat b{font-size:27px}
+  .contact-grid > div > div[style]{padding:28px 22px !important}
+}
+
+/* very small phones (~320–400px) */
+@media(max-width:400px){
+  section{padding:48px 0}
+  .wrap{padding:0 14px}
+  .brand-word{font-size:19px;letter-spacing:.18em}
+  .stats .wrap{grid-template-columns:1fr 1fr;gap:16px}
+  .syn-card,.maker-body{padding:26px 20px}
+  .prod-body{padding:14px 16px 18px}
+  .cta-band{padding:36px 20px}
+  .map-slot{padding:28px 16px}
+}
+
+/* respect reduced-motion preferences */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms !important;transition-duration:.01ms !important}
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ ANNOUNCEMENT ============ -->
+<div class="announce">Visit us in person — <b>Union Station, 3rd Floor · Washington, DC</b> · Custom gifts personalized in-store</div>
+
+<!-- ============ HEADER ============ -->
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#home">
+      <img src="images/logo.svg" alt="giftsie logo">
+      <span class="brand-word">giftsie</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home" data-nav="home">Home</a></li>
+      <li><a href="#catalog" data-nav="catalog">Catalog</a></li>
+      <li><a href="#gallery" data-nav="gallery">Gallery</a></li>
+      <li><a href="#makers" data-nav="makers">Makers</a></li>
+      <li><a href="#story" data-nav="story">My Story</a></li>
+      <li><a href="#contact" data-nav="contact">About / Contact</a></li>
+    </ul>
+    <div class="nav-cta">
+      <!-- On Shopify this becomes the live cart: {{ cart.item_count }} -->
+      <button class="cart-btn" title="Cart is enabled when the site goes live on Shopify">Bag · 0</button>
+      <button class="burger" id="burger" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<!-- ============================================================
+     PAGE: HOME
+============================================================ -->
+<main id="page-home" class="page">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-peg pegboard"></div>
+    <div class="wrap">
+      <div>
+        <p class="kicker">A boutique of local makers · Washington, DC</p>
+        <h1>Every gift here <em>tells a local story.</em></h1>
+        <p class="lede">giftsie curates handmade jewelry, apparel, home décor, stationery and one-of-a-kind souvenirs from independent artists and small businesses across DC, Maryland &amp; Virginia — so every purchase directly supports a local maker.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-solid" href="#catalog">Shop the Catalog</a>
+          <a class="btn btn-ghost" href="#makers">Meet Our Makers</a>
+        </div>
+      </div>
+      <div class="hero-art">
+        <div class="arch">
+          <img src="images/photo-1.jpg" onerror="this.onerror=null;this.src='images/placeholders/photo-1.svg'" alt="Photo #1 — hero image">
+        </div>
+        <div class="hero-badge"><b>Union Station · 3rd Floor</b>Washington, DC — open daily</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats">
+    <div class="wrap">
+      <div class="stat reveal"><b>##+</b><span>Local makers · add count</span></div>
+      <div class="stat reveal"><b>DC·MD·VA</b><span>Every maker is local</span></div>
+      <div class="stat reveal"><b data-count="100">0</b><span>% independent goods</span></div>
+      <div class="stat reveal"><b>In-store</b><span>Custom personalization</span></div>
+    </div>
+  </section>
+
+  <!-- SYNERGY: how giftsie & makers work together -->
+  <section class="synergy">
+    <div class="wrap center">
+      <p class="kicker">The giftsie way</p>
+      <h2 class="h-lg">A storefront for the <span class="serif-i" style="color:var(--kraft-deep)">DMV's creative community</span></h2>
+      <p class="lede" style="margin-top:16px">We're more than a shop — we're an avenue. Independent artists get a beautiful retail home in the heart of the capital; you get gifts you won't find anywhere else.</p>
+      <div class="syn-grid">
+        <div class="syn-card reveal">
+          <div class="syn-num">01</div>
+          <h3>Makers create</h3>
+          <p>Independent artists and small businesses across DC, Maryland &amp; Virginia craft jewelry, décor, apparel, stationery and more — each piece handmade with intention.</p>
+          <div class="syn-arrow">→</div>
+        </div>
+        <div class="syn-card reveal">
+          <div class="syn-num">02</div>
+          <h3>giftsie curates &amp; showcases</h3>
+          <p>We hand-select the best local work and give it the boutique presentation it deserves — in Union Station and online — bringing makers exposure to thousands of visitors.</p>
+          <div class="syn-arrow">→</div>
+        </div>
+        <div class="syn-card reveal">
+          <div class="syn-num">03</div>
+          <h3>You discover &amp; support</h3>
+          <p>Every purchase puts money directly into a local maker's hands and a story into yours. Shop small, gift beautifully, support local.</p>
+        </div>
+      </div>
+      <div style="margin-top:44px"><a class="btn btn-kraft" href="#makers">Become a giftsie maker</a></div>
+    </div>
+  </section>
+
+  <!-- FEATURED PRODUCTS -->
+  <section style="background:var(--cream)">
+    <div class="wrap">
+      <p class="kicker">Curated for you</p>
+      <h2 class="h-md">Featured finds</h2>
+      <p class="lede" style="margin-top:10px">A taste of what's in the shop right now — every item credited to the maker behind it.</p>
+      <div class="prod-grid" id="featuredGrid"><!-- populated by JS --></div>
+      <div class="center" style="margin-top:44px"><a class="btn btn-ghost" href="#catalog">Browse the full catalog</a></div>
+    </div>
+  </section>
+
+  <!-- FEATURED MAKERS -->
+  <section>
+    <div class="wrap">
+      <p class="kicker">The people behind the products</p>
+      <h2 class="h-md">Featured makers</h2>
+      <div class="maker-grid" id="homeMakers"><!-- populated by JS (first 3) --></div>
+    </div>
+  </section>
+
+  <!-- CUSTOM GIFTS -->
+  <section style="background:var(--cream)">
+    <div class="wrap split2" id="customRow">
+      <div style="border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)">
+        <img src="images/photo-7.jpg" onerror="this.onerror=null;this.src='images/placeholders/photo-7.svg'" alt="Photo #7 — custom gifts section">
+      </div>
+      <div>
+        <p class="kicker">Made just for them</p>
+        <h2 class="h-md">Custom gifts, personalized in-store</h2>
+        <p class="lede" style="margin-top:14px">Add a name, a date, a message — our in-store personalization turns a beautiful gift into an unforgettable one. Ask about custom orders for weddings, events and corporate gifting.</p>
+        <div style="margin-top:28px"><a class="btn btn-solid" href="#contact">Ask about custom orders</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSTAGRAM STRIP -->
+  <section>
+    <div class="wrap center">
+      <p class="kicker">Follow along</p>
+      <h2 class="h-md">@giftsie.shop on Instagram</h2>
+      <!-- INTEGRATION SLOT: replace tiles with a live feed app (e.g. Instafeed on Shopify) -->
+      <div class="ig-strip" id="igStrip"><!-- populated by JS: Photo #1–#6 --></div>
+      <div style="margin-top:36px"><a class="btn btn-ghost" href="https://www.instagram.com/giftsie.shop" target="_blank" rel="noopener">Follow @giftsie.shop</a></div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="cta-band">
+        <div class="pegwhite"></div>
+        <div style="position:relative">
+          <h2>New makers. New arrivals. First dibs.</h2>
+          <p>Join the giftsie list for maker spotlights, seasonal collections and in-store events at Union Station.</p>
+        </div>
+        <div style="position:relative">
+          <!-- INTEGRATION SLOT: wire to Shopify Email / Mailchimp form action.
+               Ricochet also syncs customers to Mailchimp natively. -->
+          <form class="news-form" onsubmit="event.preventDefault();this.querySelector('input').value='';alert('Thanks for joining the giftsie list! (Connects to Shopify Email / Mailchimp at launch)')">
+            <input type="email" placeholder="Your email address" required aria-label="Email address">
+            <button class="btn" type="submit">Join</button>
+          </form>
+          <p class="fineprint">We send a little, not a lot. Unsubscribe anytime.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============================================================
+     PAGE: CATALOG
+     On Shopify: this becomes the /collections/all template.
+     Products flow in automatically from Ricochet via the official
+     Ricochet ⇄ Shopify integration (Premium add-on) — items toggled
+     "Shopify" in Ricochet appear here with photos, price & stock.
+============================================================ -->
+<main id="page-catalog" class="page">
+  <div class="cat-head">
+    <div class="wrap">
+      <p class="kicker">The catalog</p>
+      <h1 class="h-lg">Locally made, <span class="serif-i" style="color:var(--kraft-deep)">lovingly curated</span></h1>
+      <p class="lede" style="margin-top:14px">Every item below comes from an independent maker in DC, Maryland or Virginia. Filter by category, or shop by maker.</p>
+      <div class="filters" id="filters">
+        <button class="chip active" data-f="all">All</button>
+        <button class="chip" data-f="jewelry">Jewelry</button>
+        <button class="chip" data-f="apparel">Apparel</button>
+        <button class="chip" data-f="home">Home Décor</button>
+        <button class="chip" data-f="stationery">Stationery</button>
+        <button class="chip" data-f="souvenir">DC Souvenirs</button>
+        <button class="chip" data-f="kids">Kids</button>
+        <button class="chip" data-f="seasonal">Seasonal</button>
+      </div>
+      <div class="sync-note">
+        <div class="sync-dot"></div>
+        <div><b>Live inventory, powered by Ricochet.</b> At launch, this catalog syncs automatically with giftsie's Ricochet consignment system through the official Ricochet ⇄ Shopify integration — items, photos, prices and stock update in real time as things sell in-store. The products below are demo placeholders.</div>
+      </div>
+    </div>
+  </div>
+  <section style="padding-top:48px">
+    <div class="wrap">
+      <div class="prod-grid" id="catalogGrid"><!-- populated by JS --></div>
+    </div>
+  </section>
+</main>
+
+<!-- ============================================================
+     PAGE: GALLERY
+============================================================ -->
+<main id="page-gallery" class="page">
+  <section style="padding-bottom:0;background:var(--cream)">
+    <div class="wrap center" style="padding-bottom:72px">
+      <p class="kicker">Inside the shop</p>
+      <h1 class="h-lg">The gallery</h1>
+      <p class="lede" style="margin:14px auto 0">A look inside our Union Station boutique — the displays, the details, and the handmade work of the DMV's finest makers.</p>
+    </div>
+  </section>
+  <section>
+    <div class="wrap">
+      <!-- Gallery photos: drop images/photo-1.jpg … photo-8.jpg into the images
+           folder and they appear automatically. Edit captions per photo. -->
+      <div class="gal-grid" id="galGrid"><!-- populated by JS: Photo #1–#8 --></div>
+      <div class="center" style="margin-top:48px">
+        <p class="lede" style="margin:0 auto 22px">Want more? We post new arrivals and maker features every week.</p>
+        <a class="btn btn-kraft" href="https://www.instagram.com/giftsie.shop" target="_blank" rel="noopener">See more on Instagram</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============================================================
+     PAGE: MAKERS
+============================================================ -->
+<main id="page-makers" class="page">
+  <section style="background:var(--cream);padding-bottom:64px">
+    <div class="wrap center">
+      <p class="kicker">Our partners in craft</p>
+      <h1 class="h-lg">The makers of <span class="serif-i" style="color:var(--kraft-deep)">giftsie</span></h1>
+      <p class="lede" style="margin:14px auto 0">giftsie exists to give independent artists a stage. Each maker below is a real person or small business from DC, Maryland or Virginia whose work you'll find on our shelves — and whose livelihood your purchase supports.</p>
+    </div>
+  </section>
+  <section>
+    <div class="wrap">
+      <div class="maker-grid" id="makersGrid"><!-- populated by JS, plus template cards --></div>
+    </div>
+  </section>
+
+  <!-- BECOME A MAKER -->
+  <section style="background:var(--cream)">
+    <div class="wrap split2 top" id="applyRow">
+      <div>
+        <p class="kicker">Join the family</p>
+        <h2 class="h-md">Become a giftsie maker</h2>
+        <p class="lede" style="margin-top:14px">Are you an independent artist or small business in the DMV? We'd love to see your work. giftsie gives makers premium retail space in Union Station, a spot in our online catalog, and marketing to thousands of visitors — with consignment handled transparently through our system.</p>
+        <div style="margin-top:26px">
+          <div class="info-block"><h3>① Show us your work</h3><p>Send photos, your story, and where you're based.</p></div>
+          <div class="info-block"><h3>② We curate together</h3><p>We'll find the pieces that fit the giftsie collection and agree on consignment terms.</p></div>
+          <div class="info-block"><h3>③ Your work meets DC</h3><p>Your products go on our shelves and into the online catalog — with your name on every tag.</p></div>
+        </div>
+      </div>
+      <div style="background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:38px">
+        <h3 style="font-size:22px;margin-bottom:22px">Maker application</h3>
+        <!-- INTEGRATION SLOT: point action at Shopify contact form or a
+             form service; submissions can feed your consignor pipeline. -->
+        <form onsubmit="event.preventDefault();alert('Thank you! Your application template is ready to wire to email/Shopify forms at launch.')">
+          <div class="field"><label>Your name</label><input type="text" required placeholder="Jane Maker"></div>
+          <div class="field"><label>Brand / business name</label><input type="text" placeholder="Your brand name"></div>
+          <div class="field"><label>Email</label><input type="email" required placeholder="you@example.com"></div>
+          <div class="field"><label>Based in</label><select><option>Washington, DC</option><option>Maryland</option><option>Virginia</option></select></div>
+          <div class="field"><label>What do you make?</label><textarea rows="4" placeholder="Tell us about your craft, and link your website or Instagram…"></textarea></div>
+          <button class="btn btn-solid" type="submit" style="width:100%">Submit application</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============================================================
+     PAGE: MY STORY
+============================================================ -->
+<main id="page-story" class="page">
+  <div class="story-hero">
+    <div class="wrap">
+      <div class="arch">
+        <img src="images/founder.jpg" onerror="this.onerror=null;this.src='images/placeholders/founder.svg'" alt="The founder of giftsie">
+      </div>
+      <div>
+        <p class="kicker">My story</p>
+        <h1 class="h-lg">Why I built <span class="serif-i" style="color:var(--kraft-deep)">giftsie</span></h1>
+        <div class="pullquote">"I wanted a place where a gift means more — where buying something beautiful also means believing in the person who made it."</div>
+        <p class="lede">— Founder, giftsie <em style="font-size:13px;color:var(--kraft-deep)">(replace with your name)</em></p>
+      </div>
+    </div>
+  </div>
+  <section>
+    <div class="wrap story-body">
+      <!-- TEMPLATE COPY: replace each paragraph with the founder's real story. -->
+      <p>Every city has its makers — the jewelers soldering brass at kitchen tables, the illustrators sketching row houses and cherry blossoms, the candle-pourers and quilters and printmakers working out of studios, garages and spare rooms across DC, Maryland and Virginia. Their work is extraordinary. What they've never had is a storefront in the heart of the capital. <em>(Replace with your own opening.)</em></p>
+      <p>giftsie began with a simple idea: what if a gift shop felt like a gallery of local talent instead of a souvenir aisle? What if every shelf introduced you to a neighbor — and every purchase kept a dream in business? <em>(Tell the moment the idea sparked.)</em></p>
+      <p>Today, from the third floor of historic Union Station, we welcome travelers and Washingtonians alike, and every product they pick up carries a maker's name. That's the whole point — giftsie is an avenue, and our makers are the destination. <em>(Add your journey: how you opened the shop, what it took, what's next.)</em></p>
+      <div class="pullquote">"Shop small. Gift beautifully. Support local. It's not a slogan — it's the business model."</div>
+      <p>Thank you for being part of this story. Whether you're grabbing a gift between trains or hunting for something no one else will have, you're helping the DMV's creative community grow — one thoughtful gift at a time.</p>
+      <div class="center" style="margin-top:44px">
+        <a class="btn btn-solid" href="#makers">Meet the makers</a>
+        <a class="btn btn-ghost" href="#contact" style="margin-left:12px">Visit the shop</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============================================================
+     PAGE: ABOUT / CONTACT
+============================================================ -->
+<main id="page-contact" class="page">
+  <section style="background:var(--cream);padding-bottom:56px">
+    <div class="wrap center">
+      <p class="kicker">About &amp; contact</p>
+      <h1 class="h-lg">Come say hi</h1>
+      <p class="lede" style="margin:14px auto 0">giftsie is a modern boutique gift shop on the 3rd floor of Union Station, Washington, DC — a stylish home for locally made gifts, meaningful souvenirs, and custom pieces personalized in-store.</p>
+    </div>
+  </section>
+  <section>
+    <div class="wrap contact-grid">
+      <div>
+        <div class="info-block">
+          <h3>Visit</h3>
+          <p>giftsie — Union Station, 3rd Floor<br>50 Massachusetts Ave NE<br>Washington, DC 20002</p>
+        </div>
+        <div class="info-block">
+          <h3>Hours</h3>
+          <table class="hours">
+            <tr><td>Monday – Friday</td><td>10:00 AM – 8:00 PM</td></tr>
+            <tr><td>Saturday</td><td>10:00 AM – 8:00 PM</td></tr>
+            <tr><td>Sunday</td><td>12:00 PM – 6:00 PM</td></tr>
+          </table>
+          <p style="font-size:12.5px;margin-top:10px;color:var(--kraft-deep)">Template hours — update with your real schedule.</p>
+        </div>
+        <div class="info-block">
+          <h3>Reach us</h3>
+          <!-- EMAIL DOMAIN SLOT: swap for your real branded address once
+               your email domain (e.g. hello@giftsie.shop) is set up. -->
+          <p>Email: <a href="mailto:hello@giftsie.shop" style="color:var(--kraft-deep)">hello@giftsie.shop</a><br>
+          Instagram: <a href="https://www.instagram.com/giftsie.shop" target="_blank" rel="noopener" style="color:var(--kraft-deep)">@giftsie.shop</a><br>
+          Phone: (202) 000-0000 <em style="font-size:12.5px">(replace)</em></p>
+        </div>
+        <div class="map-slot">
+          <b>Map slot</b> — paste a Google Maps embed here:<br>
+          <code style="font-size:12px">&lt;iframe src="https://www.google.com/maps/embed?pb=…"&gt;</code><br>
+          Search "Union Station Washington DC" in Google Maps → Share → Embed a map.
+        </div>
+      </div>
+      <div>
+        <div style="background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:38px">
+          <h3 style="font-size:22px;margin-bottom:6px">Send us a note</h3>
+          <p style="font-size:14px;color:var(--ink-soft);margin-bottom:22px">Questions, custom orders, corporate gifting, press — we'd love to hear from you.</p>
+          <!-- On Shopify, replace with {% form 'contact' %} so submissions
+               arrive in your store email automatically. -->
+          <form onsubmit="event.preventDefault();alert('Message template ready — wires to your Shopify contact form at launch.')">
+            <div class="field"><label>Name</label><input type="text" required></div>
+            <div class="field"><label>Email</label><input type="email" required></div>
+            <div class="field"><label>Topic</label><select><option>General question</option><option>Custom / personalized order</option><option>Corporate & event gifting</option><option>I'm a maker — partnership</option><option>Press</option></select></div>
+            <div class="field"><label>Message</label><textarea rows="5" required></textarea></div>
+            <button class="btn btn-solid" type="submit" style="width:100%">Send message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img src="images/logo.svg" alt="giftsie">
+        <p class="foot-tag">Shop small. Gift beautifully. Support local.</p>
+        <div class="socials">
+          <a class="soc" href="https://www.instagram.com/giftsie.shop" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.9.1s-3.6 0-4.8-.1c-3.3-.1-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8C2.4 4 4 2.4 7.2 2.3 8.4 2.2 8.8 2.2 12 2.2zm0 3.6a6.2 6.2 0 100 12.4 6.2 6.2 0 000-12.4zm0 10.2a4 4 0 110-8 4 4 0 010 8zm6.4-11.8a1.4 1.4 0 100 2.9 1.4 1.4 0 000-2.9z"/></svg></a>
+          <a class="soc" href="https://www.tiktok.com/@giftsie.shop" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M19.6 6.7a4.8 4.8 0 01-3.5-1.6 4.8 4.8 0 01-1.2-3.1h-3.2v13.2a2.9 2.9 0 11-2-2.7V9.2a6 6 0 103.9 5.6V9.4a7.9 7.9 0 006 1.6V7.9c-.7.1-1.4 0-2-.2z"/></svg></a>
+          <a class="soc" href="https://www.facebook.com/giftsie.shop" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M13.5 21v-8.2h2.8l.4-3.2h-3.2V7.6c0-.9.3-1.6 1.7-1.6h1.6V3.2c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.4-4 4.1v2.4H7.6v3.2h2.8V21h3.1z"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#catalog">Catalog</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#makers">Our Makers</a></li>
+          <li><a href="#story">My Story</a></li>
+          <li><a href="#contact">About / Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>For makers</h4>
+        <ul>
+          <li><a href="#makers">Become a maker</a></li>
+          <li><a href="#makers">Consignment info</a></li>
+          <li><a href="#contact">Wholesale &amp; events</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Visit</h4>
+        <ul style="opacity:.85;font-size:14px;list-style:none">
+          <li>Union Station, 3rd Floor</li>
+          <li>50 Massachusetts Ave NE</li>
+          <li>Washington, DC 20002</li>
+          <li style="margin-top:12px"><a href="mailto:hello@giftsie.shop" style="color:var(--tan)">hello@giftsie.shop</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>© <span id="year"></span> giftsie · Washington, DC. All rights reserved.</span>
+      <span>Built for Shopify · Live inventory by Ricochet</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   DEMO DATA
+   At launch these arrays are replaced by live Shopify data
+   (fed automatically from Ricochet). Products shown are examples
+   modeled on real giftsie stock.
+============================================================ */
+/* MAKERS — all template slots. For each maker: set name, location, craft,
+   a short bio, and drop a photo at images/maker-N.jpg */
+const MAKERS = [1,2,3,4,5,6].map(n => ({
+  id:'maker-'+n,
+  name:`Maker #${n}`,
+  loc:'City, State',
+  craft:'Craft / medium',
+  img:`images/maker-${n}.jpg`,
+  ph:`images/placeholders/maker-${n}.svg`,
+  bio:`Short bio for Maker #${n} — who they are, what they make, and why their work belongs at giftsie.`
+}));
+
+/* PRODUCTS — template catalog entries. Categories power the filter chips.
+   At launch, real products flow in from Ricochet via Shopify. */
+const CATS = ['jewelry','jewelry','apparel','apparel','home','home','stationery','stationery','souvenir','souvenir','kids','seasonal'];
+const CAT_LABEL = {jewelry:'Jewelry',apparel:'Apparel',home:'Home Décor',stationery:'Stationery',souvenir:'DC Souvenirs',kids:'Kids',seasonal:'Seasonal'};
+const PRODUCTS = CATS.map((cat,i) => ({
+  name:`Product #${i+1}`,
+  maker:`maker-${(i % 3) + 1}`,
+  cat,
+  featured:[0,2,5,8].includes(i)
+}));
+const makerById = id => MAKERS.find(m=>m.id===id);
+
+/* ---------- card builders ---------- */
+function productCard(p, i){
+  const m = makerById(p.maker);
+  const n = PRODUCTS.indexOf(p) + 1;
+  return `<div class="prod reveal" data-cat="${p.cat}">
+    <div class="prod-img">
+      <img src="images/product-${n}.jpg" onerror="this.onerror=null;this.src='images/placeholders/product-${n}.svg'" alt="${p.name}">
+      <span class="prod-tag">${CAT_LABEL[p.cat]}</span>
+    </div>
+    <div class="prod-body">
+      <h3>${p.name}</h3>
+      <p class="prod-maker">by <a href="#makers">${m.name}</a> · ${m.loc}</p>
+      <div class="prod-foot">
+        <span class="price">$ —</span>
+        <button class="mini-add" title="Checkout activates on Shopify launch" onclick="alert('Add-to-cart activates when the site launches on Shopify — inventory synced live from Ricochet.')">Add to bag</button>
+      </div>
+      <div class="support-note">Your purchase directly supports ${m.name}</div>
+    </div>
+  </div>`;
+}
+function makerCard(m){
+  return `<div class="maker-card reveal">
+    <div class="maker-img"><img src="${m.img}" onerror="this.onerror=null;this.src='${m.ph}'" alt="${m.name}"></div>
+    <div class="maker-body">
+      <p class="maker-loc">${m.loc} · ${m.craft}</p>
+      <h3>${m.name}</h3>
+      <p>${m.bio}</p>
+      <a class="maker-link" href="#catalog">Shop their work →</a>
+    </div>
+  </div>`;
+}
+
+/* ---------- render ---------- */
+document.getElementById('featuredGrid').innerHTML = PRODUCTS.filter(p=>p.featured).map(productCard).join('');
+document.getElementById('catalogGrid').innerHTML  = PRODUCTS.map(productCard).join('');
+document.getElementById('homeMakers').innerHTML   = MAKERS.slice(0,3).map(makerCard).join('');
+document.getElementById('makersGrid').innerHTML   = MAKERS.map(makerCard).join('');
+
+/* gallery: Photo #1–#8 */
+document.getElementById('galGrid').innerHTML = [1,2,3,4,5,6,7,8].map(n =>
+  `<div class="gal-item reveal">
+    <img src="images/photo-${n}.jpg" onerror="this.onerror=null;this.src='images/placeholders/photo-${n}.svg'" alt="Photo #${n}">
+    <div class="gal-cap">Photo #${n} — add a caption</div>
+  </div>`).join('');
+
+/* instagram strip: Photo #1–#6 */
+document.getElementById('igStrip').innerHTML = [1,2,3,4,5,6].map(n =>
+  `<a class="ig-tile" href="https://www.instagram.com/giftsie.shop" target="_blank" rel="noopener">
+    <img src="images/photo-${n}.jpg" onerror="this.onerror=null;this.src='images/placeholders/photo-${n}.svg'" alt="Photo #${n}">
+  </a>`).join('');
+
+/* ---------- catalog filters ---------- */
+document.getElementById('filters').addEventListener('click', e=>{
+  if(!e.target.matches('.chip')) return;
+  document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+  e.target.classList.add('active');
+  const f = e.target.dataset.f;
+  document.querySelectorAll('#catalogGrid .prod').forEach(card=>{
+    card.style.display = (f==='all' || card.dataset.cat===f) ? '' : 'none';
+  });
+});
+
+/* ---------- hash router ---------- */
+const PAGES = ['home','catalog','gallery','makers','story','contact'];
+function route(){
+  const h = (location.hash||'#home').slice(1);
+  const page = PAGES.includes(h) ? h : 'home';
+  PAGES.forEach(p=>document.getElementById('page-'+p).classList.toggle('active', p===page));
+  document.querySelectorAll('[data-nav]').forEach(a=>a.classList.toggle('active', a.dataset.nav===page));
+  document.getElementById('navLinks').classList.remove('open');
+  window.scrollTo({top:0});
+  observeReveals();
+}
+window.addEventListener('hashchange', route);
+
+/* ---------- mobile nav ---------- */
+document.getElementById('burger').addEventListener('click', ()=>{
+  document.getElementById('navLinks').classList.toggle('open');
+});
+
+/* ---------- reveal on scroll ---------- */
+let io;
+function observeReveals(){
+  io && io.disconnect();
+  io = new IntersectionObserver(es=>es.forEach(e=>{
+    if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+  }),{threshold:.12});
+  document.querySelectorAll('.page.active .reveal').forEach(el=>io.observe(el));
+}
+
+/* ---------- animated counters ---------- */
+const counters = document.querySelectorAll('[data-count]');
+const cio = new IntersectionObserver(es=>es.forEach(e=>{
+  if(!e.isIntersecting) return;
+  const el = e.target, end = +el.dataset.count, t0 = performance.now();
+  (function tick(t){
+    const k = Math.min((t-t0)/1200, 1);
+    el.textContent = Math.round(end * (1-Math.pow(1-k,3))) + '+';
+    if(k<1) requestAnimationFrame(tick);
+  })(t0);
+  cio.unobserve(el);
+}),{threshold:.4});
+counters.forEach(c=>cio.observe(c));
+
+document.getElementById('year').textContent = new Date().getFullYear();
+route();
+</script>
+</body>
+</html>
