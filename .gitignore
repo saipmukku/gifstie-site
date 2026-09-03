@@ -2,3 +2,11 @@
 Thumbs.db
 node_modules/
 .vercel
+
+# generated sync state — the diff baseline for the catalog sync. Regenerated on
+# every run and ~900KB, so it is kept out of history; losing it only means the
+# next sync reports every SKU as "new" once.
+sync/state/
+
+# scratch: backups of files edited in place. Safe to delete.
+_to_delete/

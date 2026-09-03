@@ -26,16 +26,52 @@ The prototype is designed to convert 1:1 into a Shopify Online Store 2.0 theme:
 3. The contact and maker-application forms become Shopify `{% form 'contact' %}` blocks — submissions arrive at your store email, no extra service needed.
 4. Point your domain in **Settings → Domains**.
 
-## 3. Ricochet catalog integration (important)
-**Don't build a custom webhook — Ricochet has an official Shopify integration** (Premium paid add-on, requires a Shopify plan above Basic):
+## 3. The catalog: Ricochet CSV → website
 
-1. In Ricochet: **Preferences → Integrations → Shopify** → choose a plan and pay.
-2. Ricochet support schedules a call and walks you through creating the Admin API access token (your Shopify login needs "Develop apps" permission).
-3. Per item you want online, in Ricochet set: **Category** (= Shopify Product Type), **weight**, **at least one photo**, and toggle **Shopify ON**.
-4. Items, prices, photos and stock then sync to Shopify automatically; online sales appear back in Ricochet (Shopify → Orders), and new customers flow into Ricochet.
+The catalog on the site today is **real giftsie inventory** — 1,415 in-stock items
+from 30 makers, published from a Ricochet product export. The site is browse-only:
+it shows what is on the shelves and drives a visit, it does not sell online.
 
-Notes: returns are handled inside Shopify (restock manually); Ricochet rewards/consignor credit don't work as online currency.
-Docs: https://help.ricoconsign.com/en/articles/9658115-shopify-integration
+```
+Ricochet export (.csv)  →  node sync/sync.mjs  →  data/products.json  →  the website
+```
+
+**To refresh the catalog (about 90 seconds):**
+1. In Ricochet, export the product list to CSV.
+2. Run the sync:
+   ```bash
+   node sync/sync.mjs --csv "~/Downloads/Products <timestamp>.csv"
+   ```
+   Add `--dry-run` first to see what would change without writing anything.
+3. Commit the updated `data/products.json` and push — Vercel redeploys.
+
+The job treats every export as the full authoritative snapshot. It validates the
+columns, **aborts rather than let a truncated export empty the website**, soft-deletes
+SKUs that fall out of the export instead of dropping them (consignment stock turns
+over fast, and hard deletes would strand links), and prints exactly what changed.
+
+**Why CSV and not the Shopify bridge.** Ricochet publishes no merchant API, and its
+Shopify add-on is a paid premium add-on that also requires a Shopify plan above Basic
+— roughly \$150–200/month for a site with no online checkout. The CSV path costs
+nothing and works today. The page still supports Shopify: if `shopifyDomain` and
+`storefrontToken` are ever filled into `SITE_CONFIG`, the Storefront API takes
+priority automatically and the static feed becomes the fallback. That is the upgrade
+path the day checkout is wanted, and it needs no rewrite.
+
+**Photos are a separate problem from data.** A CSV cannot carry images and the export
+has no image column at all. Photos live in `images/products/<SKU>.jpg` and are joined
+by SKU at sync time — see `images/products/README.md`, which also maps each SKU prefix
+to its maker so photography can be batched one consignor at a time. Items with no photo
+render a line-art glyph for their category rather than a blank box.
+
+**Two data cleanups in Ricochet are worth more than any code change:**
+- **`Category`** is filled on ~1% of items, so site navigation is currently derived from
+  product names by a keyword ruleset. Filling it in Ricochet makes navigation
+  authoritative and retires the ruleset.
+- **`Short description`** is filled on ~18% of items. It is the only product copy that
+  exists, and it is what shows when a customer hovers a card.
+
+Ricochet docs: https://help.ricoconsign.com/en/articles/9658115-shopify-integration
 
 ## 4. Email domain & newsletter
 - Buy/attach your domain in Shopify, then set up branded email (e.g. `hello@giftsie.shop`) via **Settings → Notifications → Sender email** with Google Workspace or Zoho Mail handling the mailbox.
@@ -46,7 +82,21 @@ Docs: https://help.ricoconsign.com/en/articles/9658115-shopify-integration
 - Instagram/TikTok/Facebook links are in the footer and Home page (update handles if needed).
 - For a live Instagram feed replacing the static grid, install a Shopify app like *Instafeed* and drop it into the "Follow along" section.
 
-## 6. Placeholders to replace before launch
+## 6. Meta (Facebook/Instagram) analytics
+The site has a built-in **Meta Pixel** integration — set `metaPixelId` in `SITE_CONFIG` (`index.html`) to your Pixel ID from Meta Events Manager (Business Suite → Events Manager → Data sources). Once set, the site automatically reports:
+
+- **PageView** on load and on every page change (Home → Catalog etc.)
+- **AddToCart** when a visitor clicks a product's buy button
+- **InitiateCheckout** when the Bag button is clicked
+- **Lead** on every form submit (newsletter, contact, maker application)
+
+Recommended Meta setup, in order of impact:
+1. **Meta Pixel on this site** (above) — free traffic analytics + builds retargeting audiences from day one.
+2. **Shopify's "Facebook & Instagram" sales channel app** once on Shopify — adds the server-side Conversions API (more reliable than browser-only pixels post-iOS14), syncs the product catalog to Meta, and enables **Instagram/Facebook Shop tabs and product tagging** — every synced Ricochet product becomes taggable in giftsie's Instagram posts.
+3. **Advantage+ catalog ads** — retarget visitors with the exact products they viewed, fed by the catalog sync.
+4. Add a **cookie-consent notice** before launch since the Pixel sets tracking cookies.
+
+## 7. Placeholders to replace before launch
 - Real hours, phone number, founder name and story text (marked *replace* in italics on the page)
 - Google Maps embed (instructions shown in the map slot on the About/Contact page)
 - Maker bios/photos for new makers (template cards on the Makers page)

@@ -166,6 +166,54 @@ section{padding:88px 0}
 .sync-dot{width:9px;height:9px;border-radius:50%;background:#7BA05B;margin-top:7px;flex-shrink:0;box-shadow:0 0 0 4px rgba(123,160,91,.18)}
 .sync-note b{color:var(--ink);font-weight:500}
 
+/* catalog toolbar — 1,400+ SKUs need search and paging, not one long grid */
+.cat-tools{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-top:30px}
+.cat-search{flex:1 1 280px;position:relative}
+.cat-search input{width:100%;font-family:inherit;font-size:15px;color:var(--ink);background:var(--ivory);border:1.5px solid rgba(43,38,34,.22);border-radius:999px;padding:13px 20px 13px 46px;transition:border-color .25s}
+.cat-search input:focus{outline:none;border-color:var(--kraft-deep)}
+.cat-search svg{position:absolute;left:18px;top:50%;transform:translateY(-50%);width:16px;height:16px;stroke:var(--ink-soft);fill:none;stroke-width:2}
+.cat-select{flex:0 1 240px;min-width:190px;font-family:inherit;font-size:14px;color:var(--ink);background:var(--ivory);border:1.5px solid rgba(43,38,34,.22);border-radius:999px;padding:13px 18px;cursor:pointer;max-width:100%}
+.cat-select:focus{outline:none;border-color:var(--kraft-deep)}
+.cat-count{font-size:13px;color:var(--ink-soft);margin-top:18px;letter-spacing:.02em}
+.cat-count b{color:var(--ink);font-weight:500}
+.cat-empty{text-align:center;padding:70px 20px;color:var(--ink-soft)}
+.cat-empty b{display:block;font-family:'Fraunces',serif;font-size:22px;color:var(--ink);margin-bottom:8px}
+.cat-more{display:flex;justify-content:center;margin-top:48px}
+.prod-badge{position:absolute;top:12px;right:12px;background:var(--ink);color:var(--cream);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;padding:5px 11px;border-radius:999px;z-index:2}
+.prod-desc{font-size:13px;color:var(--ink-soft);margin:0 0 12px;line-height:1.5}
+.in-store{display:inline-flex;align-items:center;gap:7px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--kraft-deep);border:1.5px solid rgba(168,122,74,.45);border-radius:999px;padding:7px 14px;background:transparent;font-family:inherit;cursor:default}
+.in-store::before{content:'';width:7px;height:7px;border-radius:50%;background:#7BA05B}
+.maker-count{font-size:12px;color:var(--ink-soft);margin-top:6px}
+
+/* facet rows — four browse axes, three of them straight from the export */
+.facet-row{display:flex;gap:12px;align-items:baseline;margin-top:18px;flex-wrap:wrap}
+.facet-label{flex:0 0 78px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);padding-top:9px}
+.facet-row .filters{flex:1 1 300px;margin-top:0;gap:8px}
+.facet-row .chip{padding:7px 15px;font-size:11.5px}
+.chip-clear{border:none;background:none;font-family:inherit;font-size:12.5px;color:var(--kraft-deep);cursor:pointer;text-decoration:underline;text-underline-offset:3px;padding:0;margin-left:10px}
+
+/* stock line — quantity and Ricochet status, side by side with the price */
+.prod-stock{display:flex;align-items:center;gap:6px;font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-soft);white-space:nowrap}
+.prod-stock::before{content:'';width:6px;height:6px;border-radius:50%;background:#7BA05B;flex-shrink:0}
+.prod-stock.low{color:var(--kraft-deep)}
+.prod-stock.low::before{background:#C8873F}
+
+/* hover description — the Short description column is only on ~18% of items,
+   so the overlay renders only where there is something to say. */
+.prod-hover{position:absolute;inset:0;background:linear-gradient(to top,rgba(43,38,34,.94),rgba(43,38,34,.82));color:var(--cream);display:flex;align-items:center;justify-content:center;text-align:center;padding:24px 20px;opacity:0;transition:opacity .3s var(--ease);pointer-events:none;z-index:3}
+.prod:hover .prod-hover,.prod:focus-within .prod-hover{opacity:1}
+.prod-hover p{font-size:13.5px;line-height:1.55;margin:0}
+.prod-hover .ph-label{display:block;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--tan);margin-bottom:9px}
+.prod[tabindex]:focus{outline:2px solid var(--kraft-deep);outline-offset:3px}
+
+/* category glyphs — stand-ins that read as the right KIND of thing, not fake
+   product photography. Inline SVG, so an item with no photo makes no request. */
+.prod-ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--cream)}
+.prod-ph::after{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(168,122,74,.14) 1px,transparent 1px);background-size:9px 9px}
+.prod-ph svg{width:44%;height:44%;stroke:var(--kraft-deep);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;opacity:.62;position:relative;z-index:1}
+.prod-img img{position:relative;z-index:2}
+@media (hover:none){.prod-hover{transition:opacity .2s}}
+
 /* ---------- gallery ---------- */
 .gal-grid{columns:3;column-gap:22px;margin-top:48px}
 .gal-item{break-inside:avoid;margin-bottom:22px;border-radius:var(--radius);overflow:hidden;position:relative;box-shadow:0 6px 24px -12px rgba(43,38,34,.18)}
@@ -278,6 +326,12 @@ footer{background:var(--ink);color:var(--cream);padding:72px 0 34px;margin-top:9
   .cart-btn{padding:9px 15px;font-size:11.5px}
   .filters{overflow-x:auto;flex-wrap:nowrap;padding-bottom:8px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
   .filters::-webkit-scrollbar{display:none}
+  /* the chip rows become horizontal scrollers on phones; without an edge fade
+     there is nothing to say the row continues past the screen */
+  .facet-row{flex-wrap:nowrap;align-items:center;gap:10px}
+  .facet-label{flex:0 0 auto;padding-top:0;font-size:10px;letter-spacing:.12em}
+  .facet-row .filters{flex:1 1 auto;min-width:0;-webkit-mask-image:linear-gradient(to right,#000 86%,transparent);mask-image:linear-gradient(to right,#000 86%,transparent)}
+  .cat-select{flex:1 1 100%}
   .chip{white-space:nowrap;flex-shrink:0}
   .cta-band{padding:44px 28px;border-radius:20px}
   .hours{font-size:13.5px}
@@ -341,7 +395,7 @@ footer{background:var(--ink);color:var(--cream);padding:72px 0 34px;margin-top:9
     </ul>
     <div class="nav-cta">
       <!-- On Shopify this becomes the live cart: {{ cart.item_count }} -->
-      <button class="cart-btn" title="Cart is enabled when the site goes live on Shopify">Bag · 0</button>
+      <button class="cart-btn" id="cartBtn" title="Opens the giftsie Shopify store">Bag</button>
       <button class="burger" id="burger" aria-label="Menu">☰</button>
     </div>
   </div>
@@ -494,26 +548,36 @@ footer{background:var(--ink);color:var(--cream);padding:72px 0 34px;margin-top:9
     <div class="wrap">
       <p class="kicker">The catalog</p>
       <h1 class="h-lg">Locally made, <span class="serif-i" style="color:var(--kraft-deep)">lovingly curated</span></h1>
-      <p class="lede" style="margin-top:14px">Every item below comes from an independent maker in DC, Maryland or Virginia. Filter by category, or shop by maker.</p>
-      <div class="filters" id="filters">
-        <button class="chip active" data-f="all">All</button>
-        <button class="chip" data-f="jewelry">Jewelry</button>
-        <button class="chip" data-f="apparel">Apparel</button>
-        <button class="chip" data-f="home">Home Décor</button>
-        <button class="chip" data-f="stationery">Stationery</button>
-        <button class="chip" data-f="souvenir">DC Souvenirs</button>
-        <button class="chip" data-f="kids">Kids</button>
-        <button class="chip" data-f="seasonal">Seasonal</button>
+      <p class="lede" style="margin-top:14px">Every item below comes from an independent maker in DC, Maryland or Virginia. Browse by maker, price or what's just arrived — or search the whole shop.</p>
+      <!-- Filter chips are generated from the categories present in the live
+           product data (Ricochet Category = Shopify Product Type). -->
+      <div class="cat-tools">
+        <div class="cat-search">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+          <input type="search" id="catSearch" placeholder="Search 1,400+ items — &ldquo;magnet&rdquo;, &ldquo;earrings&rdquo;, &ldquo;cherry blossom&rdquo;&hellip;" autocomplete="off" aria-label="Search the catalog">
+        </div>
+        <select class="cat-select" id="makerSelect" aria-label="Filter by maker"><option value="all">All makers</option></select>
+        <select class="cat-select" id="sortSelect" aria-label="Sort the catalog">
+          <option value="new">Newest first</option>
+          <option value="price-asc">Price: low to high</option>
+          <option value="price-desc">Price: high to low</option>
+          <option value="name">Name A–Z</option>
+        </select>
       </div>
+      <div class="facet-row"><span class="facet-label">Category</span><div class="filters" id="filters"></div></div>
+      <div class="facet-row"><span class="facet-label">Price</span><div class="filters" id="priceFilters"></div></div>
+      <div class="facet-row"><span class="facet-label">Arrivals</span><div class="filters" id="dateFilters"></div></div>
+      <div class="cat-count" id="catCount"></div>
       <div class="sync-note">
         <div class="sync-dot"></div>
-        <div><b>Live inventory, powered by Ricochet.</b> At launch, this catalog syncs automatically with giftsie's Ricochet consignment system through the official Ricochet ⇄ Shopify integration — items, photos, prices and stock update in real time as things sell in-store. The products below are demo placeholders.</div>
+        <div id="syncNoteText"><b>Live inventory from the shop floor.</b> This catalog is generated from giftsie's Ricochet point-of-sale export, so items, prices and stock match what is on the shelves. Everything here is browse-only — come see it in person at Union Station.</div>
       </div>
     </div>
   </div>
   <section style="padding-top:48px">
     <div class="wrap">
       <div class="prod-grid" id="catalogGrid"><!-- populated by JS --></div>
+      <div class="cat-more" id="catMore"></div>
     </div>
   </section>
 </main>
@@ -732,72 +796,345 @@ footer{background:var(--ink);color:var(--cream);padding:72px 0 34px;margin-top:9
 
 <script>
 /* ============================================================
-   DEMO DATA
-   At launch these arrays are replaced by live Shopify data
-   (fed automatically from Ricochet). Products shown are examples
-   modeled on real giftsie stock.
-============================================================ */
-/* MAKERS — all template slots. For each maker: set name, location, craft,
-   a short bio, and drop a photo at images/maker-N.jpg */
-const MAKERS = [1,2,3,4,5,6].map(n => ({
-  id:'maker-'+n,
-  name:`Maker #${n}`,
-  loc:'City, State',
-  craft:'Craft / medium',
-  img:`images/maker-${n}.jpg`,
-  ph:`images/placeholders/maker-${n}.svg`,
-  bio:`Short bio for Maker #${n} — who they are, what they make, and why their work belongs at giftsie.`
-}));
+   SITE CONFIG — single place to switch on every integration.
+   ------------------------------------------------------------
+   CATALOG DATA FLOW:  Ricochet ⇄ Shopify (official sync, already
+   active) → this site reads Shopify's Storefront API live in the
+   browser. No scraping, no cron jobs — the catalog is current on
+   every page load, and product links go to real Shopify product
+   pages with working checkout.
 
-/* PRODUCTS — template catalog entries. Categories power the filter chips.
-   At launch, real products flow in from Ricochet via Shopify. */
-const CATS = ['jewelry','jewelry','apparel','apparel','home','home','stationery','stationery','souvenir','souvenir','kids','seasonal'];
-const CAT_LABEL = {jewelry:'Jewelry',apparel:'Apparel',home:'Home Décor',stationery:'Stationery',souvenir:'DC Souvenirs',kids:'Kids',seasonal:'Seasonal'};
-const PRODUCTS = CATS.map((cat,i) => ({
+   To connect:
+   1. Shopify admin → Settings → Apps and sales channels →
+      Develop apps → Create app ("giftsie website").
+   2. Configure Storefront API scopes: enable
+      unauthenticated_read_product_listings. Install the app.
+   3. Copy the *Storefront API access token* (this token is
+      designed to be public/client-side safe — it is read-only
+      for published products) into storefrontToken below, and
+      set shopifyDomain to the myshopify.com domain.
+============================================================ */
+const SITE_CONFIG = {
+  shopifyDomain:   '',   // e.g. 'giftsie.myshopify.com'
+  storefrontToken: '',   // Storefront API access token (public, read-only)
+  productsFeed:    'data/products.json', // optional static fallback feed
+  metaPixelId:     ''    // Meta Pixel ID — enables Facebook/Instagram analytics (see LAUNCH-GUIDE)
+};
+
+/* MAKERS — derived from the catalog feed at runtime (the Consignor column of
+   the Ricochet export), so the makers page always matches what is in stock.
+   Location / craft / bio come from sync/makers.json via the sync job; until
+   those are filled in, a maker renders with just a name and an item count. */
+let MAKERS = [];
+function buildMakers(products){
+  const by = new Map();
+  products.forEach((p, i) => {
+    if(!p.maker) return;
+    const k = p.maker.toLowerCase();
+    if(!by.has(k)) by.set(k, {id:'maker-'+slugify(p.maker), name:p.maker, loc:p.makerLoc||'', craft:'', items:0, n:by.size+1});
+    const m = by.get(k);
+    m.items++;
+    if(!m.craft && p.category) m.craft = p.category;
+  });
+  return [...by.values()].sort((a,b) => b.items - a.items).map((m,i) => ({
+    ...m,
+    img:`images/makers/${m.id}.jpg`,
+    ph:`images/placeholders/maker-${(i % 6) + 1}.svg`,
+    bio:`${m.name} has ${m.items} ${m.items === 1 ? 'piece' : 'pieces'} on our shelves right now. Add a short bio in sync/makers.json.`
+  }));
+}
+
+/* ============================================================
+   PRODUCT DATA PIPELINE
+   Source order: 1) Shopify Storefront API (live, fed by Ricochet)
+                 2) data/products.json static feed (optional)
+                 3) generic numbered placeholders
+============================================================ */
+const slugify = s => String(s||'other').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'') || 'other';
+
+/* Placeholder catalog (shown until Shopify is connected) */
+const PH_CATS = ['Jewelry','Jewelry','Apparel','Apparel','Home Décor','Home Décor','Stationery','Stationery','DC Souvenirs','DC Souvenirs','Kids','Seasonal'];
+const PLACEHOLDER_PRODUCTS = PH_CATS.map((category,i) => ({
   name:`Product #${i+1}`,
-  maker:`maker-${(i % 3) + 1}`,
-  cat,
+  category,
+  price:null,
+  image:`images/product-${i+1}.jpg`,
+  imageFallback:`images/placeholders/product-${i+1}.svg`,
+  maker:`Maker #${(i % 3) + 1}`,
+  makerLoc:'City, State',
+  url:null,
   featured:[0,2,5,8].includes(i)
 }));
-const makerById = id => MAKERS.find(m=>m.id===id);
+
+async function fetchShopifyProducts(){
+  const {shopifyDomain, storefrontToken} = SITE_CONFIG;
+  if(!shopifyDomain || !storefrontToken) return null;
+  const query = `{ products(first: 100, sortKey: PRODUCT_TYPE) { edges { node {
+      title productType vendor onlineStoreUrl availableForSale
+      featuredImage { url altText }
+      priceRange { minVariantPrice { amount currencyCode } }
+  } } } }`;
+  try{
+    const r = await fetch(`https://${shopifyDomain}/api/2024-10/graphql.json`, {
+      method:'POST',
+      headers:{'Content-Type':'application/json','X-Shopify-Storefront-Access-Token':storefrontToken},
+      body:JSON.stringify({query})
+    });
+    if(!r.ok) return null;
+    const j = await r.json();
+    const edges = j?.data?.products?.edges || [];
+    if(!edges.length) return null;
+    return edges.map(({node:p}) => ({
+      name: p.title,
+      category: p.productType || 'Other',      // Ricochet Category → Shopify Product Type
+      price: parseFloat(p.priceRange?.minVariantPrice?.amount) || null,
+      image: p.featuredImage?.url || null,
+      imageFallback: 'images/placeholders/product-1.svg',
+      maker: p.vendor && p.vendor.toLowerCase() !== 'giftsie' ? p.vendor : null,
+      makerLoc: null,
+      url: p.onlineStoreUrl,                   // real Shopify product page → working checkout
+      available: p.availableForSale,
+      featured: false
+    })).filter(p => p.available !== false);
+  }catch(e){ return null; }
+}
+
+async function fetchFeedProducts(){
+  try{
+    const r = await fetch(SITE_CONFIG.productsFeed, {cache:'no-store'});
+    if(!r.ok) return null;
+    const j = await r.json();
+    return (j.products && j.products.length) ? j : null;
+  }catch(e){ return null; }
+}
 
 /* ---------- card builders ---------- */
+/* Product names come straight out of Ricochet and contain quotes, ampersands
+   and slashes ('Candle, 8oz "Cherry Blossom"'), so everything is escaped
+   before it reaches the DOM. */
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+/* ---------- category glyphs ----------
+   Line-art stand-ins keyed to the derived category, so a card without a photo
+   still reads as the right KIND of object. Deliberately not photographic —
+   these should never be mistaken for the product. Drawn on a 24×24 grid. */
+const ICONS = {
+  'jewelry':            '<circle cx="12" cy="15.5" r="5"/><path d="M12 10V4.5a2.5 2.5 0 1 1 5 0"/>',
+  'magnets':            '<path d="M5 19V10a7 7 0 0 1 14 0v9"/><path d="M5 14.5h4M15 14.5h4"/><path d="M5 19h4v-4.5M15 19h4v-4.5"/>',
+  'prints-wall-art':    '<rect x="3" y="4" width="18" height="16" rx="1.5"/><path d="M3 16l5-5 4 4 3-3 6 5"/><circle cx="15" cy="9" r="1.4"/>',
+  'cards-stationery':   '<rect x="2.5" y="5" width="19" height="14" rx="1.5"/><path d="M2.5 7l9.5 6.5L21.5 7"/>',
+  'books':              '<path d="M12 6.5C10.5 5 8 4.5 4 4.5v13c4 0 6.5.5 8 2 1.5-1.5 4-2 8-2v-13c-4 0-6.5.5-8 2z"/><path d="M12 6.5v13"/>',
+  'candles-fragrance':  '<rect x="7.5" y="10" width="9" height="11" rx="1.2"/><path d="M12 10V7.5"/><path d="M12 6.5c1.6-1.3.6-3 0-3.5-.6.5-1.6 2.2 0 3.5z"/>',
+  'bath-body':          '<path d="M12 3.5s5.5 5.6 5.5 9.4a5.5 5.5 0 1 1-11 0C6.5 9.1 12 3.5 12 3.5z"/><path d="M9.5 14.5a2.6 2.6 0 0 0 2.5 2.5"/>',
+  'bags-purses':        '<path d="M4 8.5h16l-1.2 11.5H5.2z"/><path d="M8.5 8.5V6.8a3.5 3.5 0 0 1 7 0v1.7"/>',
+  'accessories':        '<circle cx="7.5" cy="12" r="3.5"/><path d="M11 12h9"/><path d="M16.5 12v3.2M19.5 12v2.4"/>',
+  'apparel':            '<path d="M8.5 3.5L4 6l1.8 4L8 9v11.5h8V9l2.2 1L20 6l-4.5-2.5a3.5 3.5 0 0 1-7 0z"/>',
+  'kids-toys':          '<circle cx="12" cy="13.5" r="6"/><circle cx="7.5" cy="6.5" r="2.6"/><circle cx="16.5" cy="6.5" r="2.6"/><path d="M10 13h.01M14 13h.01"/><path d="M10.2 16a2.6 2.6 0 0 0 3.6 0"/>',
+  'home-kitchen':       '<path d="M4 7h13v9a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4z"/><path d="M17 10h1.8a2.6 2.6 0 0 1 0 5.2H17"/><path d="M8 4.2v1.4M12 3.6v2"/>',
+  'wood-stud':          '<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.2"/><path d="M12 4v2.5M12 17.5V20M4 12h2.5M17.5 12H20"/>',
+  'dc-souvenirs':       '<path d="M4 20h16"/><path d="M6 20V11h12v9"/><path d="M12 3.5l6 7.5H6z"/><path d="M9.5 20v-4.5h5V20"/>',
+  'other':              '<rect x="3" y="9" width="18" height="11" rx="1.2"/><path d="M3 9h18M12 9v11"/><path d="M12 9S9.5 4 7.5 5.2 9.8 9 12 9zM12 9s2.5-5 4.5-3.8S14.2 9 12 9z"/>',
+};
+const iconFor = cat => ICONS[slugify(cat)] || ICONS.other;
+
+function stockLine(p){
+  const low = p.lowStock || (p.quantity !== null && p.quantity !== undefined && p.quantity <= 2);
+  const status = p.status || (p.quantity > 0 ? 'In stock' : '');
+  const qty = (p.quantity === null || p.quantity === undefined) ? '' : ` · ${p.quantity} left`;
+  if(!status) return '';
+  return `<span class="prod-stock${low ? ' low' : ''}">${esc(status)}${qty}</span>`;
+}
+
 function productCard(p, i){
-  const m = makerById(p.maker);
-  const n = PRODUCTS.indexOf(p) + 1;
-  return `<div class="prod reveal" data-cat="${p.cat}">
+  const price = (p.price || p.price === 0) ? `$${Number(p.price).toFixed(2).replace(/\.00$/,'')}` : '$ —';
+  const makerLine = p.maker
+    ? `by <a href="#makers">${esc(p.maker)}</a>${p.makerLoc ? ' · '+esc(p.makerLoc) : ''}`
+    : 'from an independent local maker';
+  const badge = p.lowStock ? `<span class="prod-badge">Last one or two</span>` : '';
+  /* Only ~18% of items carry a Short description; the rest get no hover panel
+     rather than a hover panel with nothing in it. */
+  const hover = p.description
+    ? `<div class="prod-hover"><p><span class="ph-label">About this piece</span>${esc(p.description)}</p></div>`
+    : '';
+  /* The glyph tile is always the base layer, so a missing or broken photo
+     degrades to the right icon instead of a 404 and a grey box. */
+  const photo = p.image
+    ? `<img src="${esc(p.image)}" alt="${esc(p.name)}" loading="lazy" onerror="this.remove()">`
+    : '';
+  return `<div class="prod reveal" data-cat="${slugify(p.category)}" tabindex="0">
     <div class="prod-img">
-      <img src="images/product-${n}.jpg" onerror="this.onerror=null;this.src='images/placeholders/product-${n}.svg'" alt="${p.name}">
-      <span class="prod-tag">${CAT_LABEL[p.cat]}</span>
+      ${badge}
+      <div class="prod-ph"><svg viewBox="0 0 24 24" aria-hidden="true">${iconFor(p.category)}</svg></div>
+      ${photo}
+      ${hover}
+      <span class="prod-tag">${esc(p.category || 'Gift')}</span>
     </div>
     <div class="prod-body">
-      <h3>${p.name}</h3>
-      <p class="prod-maker">by <a href="#makers">${m.name}</a> · ${m.loc}</p>
+      <h3>${esc(p.name)}</h3>
+      <p class="prod-maker">${makerLine}</p>
       <div class="prod-foot">
-        <span class="price">$ —</span>
-        <button class="mini-add" title="Checkout activates on Shopify launch" onclick="alert('Add-to-cart activates when the site launches on Shopify — inventory synced live from Ricochet.')">Add to bag</button>
+        <span class="price">${price}</span>
+        ${stockLine(p)}
       </div>
-      <div class="support-note">Your purchase directly supports ${m.name}</div>
     </div>
   </div>`;
 }
 function makerCard(m){
   return `<div class="maker-card reveal">
-    <div class="maker-img"><img src="${m.img}" onerror="this.onerror=null;this.src='${m.ph}'" alt="${m.name}"></div>
+    <div class="maker-img"><img src="${m.img}" onerror="this.onerror=null;this.src='${m.ph}'" alt="${esc(m.name)}"></div>
     <div class="maker-body">
-      <p class="maker-loc">${m.loc} · ${m.craft}</p>
-      <h3>${m.name}</h3>
-      <p>${m.bio}</p>
+      <p class="maker-loc">${[m.loc, m.craft].filter(Boolean).join(' · ') || 'DC · Maryland · Virginia'}</p>
+      <h3>${esc(m.name)}</h3>
+      <p class="maker-count">${m.items} ${m.items === 1 ? 'item' : 'items'} in stock</p>
+      <p>${esc(m.bio)}</p>
       <a class="maker-link" href="#catalog">Shop their work →</a>
     </div>
   </div>`;
 }
 
 /* ---------- render ---------- */
-document.getElementById('featuredGrid').innerHTML = PRODUCTS.filter(p=>p.featured).map(productCard).join('');
-document.getElementById('catalogGrid').innerHTML  = PRODUCTS.map(productCard).join('');
-document.getElementById('homeMakers').innerHTML   = MAKERS.slice(0,3).map(makerCard).join('');
-document.getElementById('makersGrid').innerHTML   = MAKERS.map(makerCard).join('');
+/* ~1,400 in-stock SKUs. Rendering that as one grid is an unusable page, so the
+   catalog is a filtered, sorted, paged view over an in-memory array.
+   Four browse axes — three of them are values that come straight out of the
+   Ricochet export and cannot be wrong:
+     maker    ← Consignor (30 values, 1:1 with the SKU prefix)
+     price    ← Agreed Price, bucketed into the bands in sync/config.json
+     arrivals ← the "In stock" column, which is the intake DATE
+   The fourth, category, is inferred from the product name and is the only one
+   that is a guess. It goes away the day Ricochet's Category field is filled in. */
+const PAGE_SIZE = 48;
+let CATALOG = [];
+let BANDS = [];
+let NEW_DAYS = 45;
+const VIEW = { q: '', cat: 'all', maker: 'all', band: 'all', fresh: 'all', sort: 'new', page: 1 };
+
+const bandOf = p => BANDS.findIndex(b =>
+  (b.min === undefined || p.price >= b.min) && (b.max === undefined || p.price < b.max));
+
+function isNewArrival(p){
+  if(!p.addedAt || !NEW_DAYS) return false;
+  const d = Date.parse(p.addedAt);
+  if(Number.isNaN(d)) return false;
+  return (NEWEST_AT - d) / 86400000 <= NEW_DAYS;
+}
+/* Dated against the newest row in the export, not against today: a catalog
+   synced last week should still show that week's arrivals as new. */
+let NEWEST_AT = Date.now();
+
+function matches(p){
+  if(VIEW.cat !== 'all' && slugify(p.category) !== VIEW.cat) return false;
+  if(VIEW.maker !== 'all' && (p.maker || '') !== VIEW.maker) return false;
+  if(VIEW.band !== 'all' && String(bandOf(p)) !== VIEW.band) return false;
+  if(VIEW.fresh === 'new' && !isNewArrival(p)) return false;
+  if(VIEW.q){
+    const hay = `${p.name} ${p.description || ''} ${p.maker || ''} ${p.category || ''}`.toLowerCase();
+    if(!VIEW.q.split(/\s+/).every(t => hay.includes(t))) return false;
+  }
+  return true;
+}
+
+const SORTS = {
+  'new':        (a,b) => String(b.addedAt||'').localeCompare(String(a.addedAt||'')),
+  'price-asc':  (a,b) => (a.price ?? 0) - (b.price ?? 0),
+  'price-desc': (a,b) => (b.price ?? 0) - (a.price ?? 0),
+  'name':       (a,b) => a.name.localeCompare(b.name),
+};
+
+function renderView(){
+  const hits = CATALOG.filter(matches).sort(SORTS[VIEW.sort] || SORTS.new);
+  const shown = hits.slice(0, VIEW.page * PAGE_SIZE);
+  const grid = document.getElementById('catalogGrid');
+
+  grid.innerHTML = shown.length
+    ? shown.map(productCard).join('')
+    : `<div class="cat-empty" style="grid-column:1/-1"><b>Nothing matches that yet</b>Try a different search, or clear the filters to see everything in stock.</div>`;
+
+  const filtered = hits.length !== CATALOG.length;
+  document.getElementById('catCount').innerHTML =
+    (filtered
+      ? `<b>${hits.length.toLocaleString()}</b> of ${CATALOG.length.toLocaleString()} items`
+      : `<b>${CATALOG.length.toLocaleString()}</b> items in stock right now`)
+    + (filtered ? `<button class="chip-clear" id="clearBtn">Clear filters</button>` : '');
+  const clear = document.getElementById('clearBtn');
+  if(clear) clear.addEventListener('click', resetView);
+
+  const more = document.getElementById('catMore');
+  more.innerHTML = shown.length < hits.length
+    ? `<button class="btn btn-ghost" id="moreBtn">Show more (${(hits.length - shown.length).toLocaleString()} left)</button>`
+    : '';
+  const btn = document.getElementById('moreBtn');
+  if(btn) btn.addEventListener('click', () => { VIEW.page++; renderView(); });
+
+  observeReveals();
+}
+
+function resetView(){
+  Object.assign(VIEW, { q:'', cat:'all', maker:'all', band:'all', fresh:'all', page:1 });
+  document.getElementById('catSearch').value = '';
+  document.getElementById('makerSelect').value = 'all';
+  activate('#filters', 'all');
+  activate('#priceFilters', 'all');
+  activate('#dateFilters', 'all');
+  renderView();
+}
+
+function activate(sel, val){
+  document.querySelectorAll(`${sel} .chip`).forEach(c => c.classList.toggle('active', c.dataset.f === val));
+}
+
+function renderCatalog(products, source, facets){
+  CATALOG = products;
+  BANDS = facets?.priceBands?.length ? facets.priceBands : [];
+  NEW_DAYS = facets?.newArrivalDays ?? 45;
+  const stamps = products.map(p => Date.parse(p.addedAt)).filter(n => !Number.isNaN(n));
+  NEWEST_AT = stamps.length ? Math.max(...stamps) : Date.now();
+
+  const featured = products.filter(p => p.featured);
+  document.getElementById('featuredGrid').innerHTML =
+    (featured.length ? featured : [...products].sort(SORTS.new).slice(0, 8)).map(productCard).join('');
+
+  /* Chips carry their own counts, biggest first — the categories are very
+     uneven and an alphabetical list buries Magnets (278) under Apparel (22). */
+  const chips = (id, entries) => {
+    document.getElementById(id).innerHTML =
+      `<button class="chip active" data-f="all">All</button>` +
+      entries.map(([label, val, n]) =>
+        `<button class="chip" data-f="${val}">${esc(label)} <span style="opacity:.55">${n}</span></button>`).join('');
+  };
+
+  const counts = {};
+  products.forEach(p => { const c = p.category || 'Other'; counts[c] = (counts[c] || 0) + 1; });
+  chips('filters', Object.entries(counts).sort((a,b) => b[1] - a[1]).map(([c,n]) => [c, slugify(c), n]));
+
+  const bandCounts = BANDS.map((b, i) => [b.label, String(i), products.filter(p => bandOf(p) === i).length]);
+  chips('priceFilters', bandCounts.filter(b => b[2] > 0));
+
+  const freshCount = products.filter(isNewArrival).length;
+  document.getElementById('dateFilters').innerHTML =
+    `<button class="chip active" data-f="all">Everything</button>` +
+    `<button class="chip" data-f="new">Just in · last ${NEW_DAYS} days <span style="opacity:.55">${freshCount}</span></button>`;
+
+  MAKERS = buildMakers(products);
+  document.getElementById('makerSelect').innerHTML =
+    `<option value="all">All makers (${MAKERS.length})</option>` +
+    MAKERS.map(m => `<option value="${esc(m.name)}">${esc(m.name)} (${m.items})</option>`).join('');
+  document.getElementById('homeMakers').innerHTML = MAKERS.slice(0,3).map(makerCard).join('');
+  document.getElementById('makersGrid').innerHTML = MAKERS.map(makerCard).join('');
+
+  if(source === 'placeholder'){
+    document.getElementById('syncNoteText').innerHTML =
+      '<b>Demo catalog.</b> These are placeholders — run <code>node sync/sync.mjs --csv &lt;export.csv&gt;</code> to publish the real Ricochet inventory.';
+  }
+  renderView();
+}
+
+async function loadCatalog(){
+  const shopify = await fetchShopifyProducts();
+  if(shopify){ renderCatalog(shopify, 'shopify', null); return; }
+  const feed = await fetchFeedProducts();
+  renderCatalog(feed?.products || PLACEHOLDER_PRODUCTS, feed ? 'feed' : 'placeholder', feed?.facets);
+}
+loadCatalog();
 
 /* gallery: Photo #1–#8 */
 document.getElementById('galGrid').innerHTML = [1,2,3,4,5,6,7,8].map(n =>
@@ -814,13 +1151,81 @@ document.getElementById('igStrip').innerHTML = [1,2,3,4,5,6].map(n =>
 
 /* ---------- catalog filters ---------- */
 document.getElementById('filters').addEventListener('click', e=>{
-  if(!e.target.matches('.chip')) return;
-  document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
-  e.target.classList.add('active');
-  const f = e.target.dataset.f;
-  document.querySelectorAll('#catalogGrid .prod').forEach(card=>{
-    card.style.display = (f==='all' || card.dataset.cat===f) ? '' : 'none';
-  });
+  const chip = e.target.closest('.chip');
+  if(!chip) return;
+  activate('#filters', chip.dataset.f);
+  VIEW.cat = chip.dataset.f;
+  VIEW.page = 1;
+  renderView();
+});
+
+let searchTimer;
+document.getElementById('catSearch').addEventListener('input', e=>{
+  clearTimeout(searchTimer);
+  const v = e.target.value.trim().toLowerCase();
+  // Debounced: re-filtering 1,400 rows on every keystroke is wasted work.
+  searchTimer = setTimeout(()=>{ VIEW.q = v; VIEW.page = 1; renderView(); }, 140);
+});
+
+document.getElementById('priceFilters').addEventListener('click', e=>{
+  const chip = e.target.closest('.chip');
+  if(!chip) return;
+  activate('#priceFilters', chip.dataset.f);
+  VIEW.band = chip.dataset.f; VIEW.page = 1; renderView();
+});
+
+document.getElementById('dateFilters').addEventListener('click', e=>{
+  const chip = e.target.closest('.chip');
+  if(!chip) return;
+  activate('#dateFilters', chip.dataset.f);
+  VIEW.fresh = chip.dataset.f; VIEW.page = 1; renderView();
+});
+
+document.getElementById('makerSelect').addEventListener('change', e=>{
+  VIEW.maker = e.target.value;
+  VIEW.page = 1;
+  renderView();
+});
+
+document.getElementById('sortSelect').addEventListener('change', e=>{
+  VIEW.sort = e.target.value;
+  VIEW.page = 1;
+  renderView();
+});
+
+/* ============================================================
+   META (Facebook/Instagram) PIXEL
+   Set SITE_CONFIG.metaPixelId to enable. Tracks: PageView (incl.
+   virtual page changes), AddToCart / product clicks, and Lead on
+   form submissions — giving Meta Business Suite real analytics
+   and enabling retargeting audiences.
+   Once on Shopify, ALSO install Shopify's "Facebook & Instagram"
+   sales channel for server-side Conversions API + catalog sync.
+============================================================ */
+function initMetaPixel(){
+  if(!SITE_CONFIG.metaPixelId) return;
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+  document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', SITE_CONFIG.metaPixelId);
+  fbq('track', 'PageView');
+}
+function track(event, data){ if(window.fbq) fbq('track', event, data||{}); }
+initMetaPixel();
+
+/* form submissions → Meta Lead events (newsletter, contact, maker application) */
+document.addEventListener('submit', () => track('Lead'), true);
+
+/* ---------- cart button → Shopify store ---------- */
+document.getElementById('cartBtn').addEventListener('click', ()=>{
+  if(SITE_CONFIG.shopifyDomain){
+    track('InitiateCheckout');
+    window.open(`https://${SITE_CONFIG.shopifyDomain}/cart`, '_blank', 'noopener');
+  } else {
+    alert('The cart opens the giftsie Shopify store once the store connection is configured (see SITE_CONFIG).');
+  }
 });
 
 /* ---------- hash router ---------- */
@@ -834,7 +1239,7 @@ function route(){
   window.scrollTo({top:0});
   observeReveals();
 }
-window.addEventListener('hashchange', route);
+window.addEventListener('hashchange', ()=>{ route(); track('PageView'); });
 
 /* ---------- mobile nav ---------- */
 document.getElementById('burger').addEventListener('click', ()=>{

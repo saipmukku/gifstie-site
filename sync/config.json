@@ -1,0 +1,60 @@
+{
+  "_comment": "Mapped against the real Ricochet export (Products 2026-09-03T…Z.csv, 1606 rows). Matching ignores case, spaces and punctuation. First alias with a NON-EMPTY value wins, so dead columns in the export (Brand, Supplier, Department) fall through harmlessly.",
+
+  "columns": {
+    "sku": ["SKU", "Item SKU", "Sku #"],
+    "name": ["Name", "Item Name", "Title", "Product"],
+    "category": ["Category", "Department", "Product Type"],
+    "maker": ["Consignor", "Brand", "Vendor", "Supplier", "Maker"],
+    "price": ["Agreed Price", "Aged Price", "Price", "Retail Price", "Sell Price"],
+    "quantity": ["Quantity", "Qty", "Qty On Hand", "On Hand"],
+    "status": ["Inventory", "Stock Status"],
+    "addedAt": ["In stock", "Date Added", "Intake Date"],
+    "description": ["Online Description", "Short description"],
+    "published": ["Shopify", "Publish", "Published", "Online", "Web", "Sell Online"]
+  },
+
+  "required": ["sku", "name", "price"],
+
+  "skuCleanup": {
+    "_comment": "Ricochet writes SKUs as '004001 — a leading apostrophe is Excel's text guard, not part of the SKU. Stripped before the SKU is used as a key or a filename.",
+    "stripLeadingApostrophe": true
+  },
+
+  "guards": {
+    "maxRowDropPercent": 40,
+    "minRows": 1
+  },
+
+  "assets": {
+    "_comment": "The export carries NO image column and never will — photos are joined here by SKU. requireImageToPublish is false for launch so the catalog can go live on placeholders; flip it true once real photography exists and unphotographed items should be held back instead.",
+    "dir": "images/products",
+    "extensions": ["jpg", "jpeg", "png", "webp", "avif"],
+    "placeholderCount": 12,
+    "requireImageToPublish": false
+  },
+
+  "catalog": {
+    "_comment": "The export has no Shopify/online toggle, so requirePublishedColumn is false and availability is decided by the Inventory status column instead of by quantity alone.",
+    "requirePublishedColumn": false,
+    "requireInStock": true,
+    "inStockStatuses": ["In Stock", "Low Stock"],
+    "lowStockStatuses": ["Low Stock"],
+    "deriveCategories": true,
+    "_facetComment": "Browse axes. `maker` and `price` and `new` come straight out of the export and are authoritative; `category` is the derived keyword guess and is the only one that can be wrong.",
+    "priceBands": [
+      { "label": "Under $15", "max": 15 },
+      { "label": "$15 – $30", "min": 15, "max": 30 },
+      { "label": "$30 – $60", "min": 30, "max": 60 },
+      { "label": "$60 and up", "min": 60 }
+    ],
+    "newArrivalDays": 45,
+    "featuredSkus": [],
+    "productUrlTemplate": null,
+    "defaultCategory": "Other"
+  },
+
+  "deploy": {
+    "hookUrl": null
+  }
+}

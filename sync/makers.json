@@ -1,0 +1,215 @@
+{
+  "_comment": "Seeded from the Consignor column of the 2026-09-03 Ricochet export \u2014 every name is exact, so the sync's case-insensitive join hits. `items` is the in-stock count at seed time (informational only). Fill loc/craft/bio per maker; blanks render as an unstyled card, they do not break the site.",
+  "makers": [
+    {
+      "name": "Harmonized Treasures LLC",
+      "loc": "",
+      "craft": "",
+      "bio": "",
+      "items": 330
+    },
+    {
+      "name": "Bridget Coral",
+      "loc": "",
+      "craft": "",
+      "bio": "",
+      "items": 141
+    },
+    {
+      "name": "Violet Red Studio LLC",
+      "loc": "",
+      "craft": "",
+      "bio": "",
+      "items": 181
+    },
+    {
+      "name": "Heidi Pix LLC",
+      "loc": "",
+      "craft": "",
+      "bio": "",
+      "items": 70
+    },
+    {
+      "name": "Hector Zarate",
+      "loc": "",
+      "craft": "",
+      "bio": "",
+      "items": 44
+    },
+    {
+      "name": "X40 Designs LLC",
+      "loc": "",
+      "craft": "",
+      "bio": "",
+      "items": 56
+    },
+    {
+      "name": "Beasties and Besties LLC",
+      "loc": "",
+      "craft": "",
+      "bio": "",
+      "items": 46
+    },
+    {
+      "name": "Ramuri LLC",
+      "loc": "",
+      "craft": "",
+      "bio": "",
+      "items": 42
+    },
+    {
+      "name": "Mimonovas El Gocho Express LLC",
+      "loc": "",
+      "craft": "",
+      "bio": "",
+      "items": 29
+    },
+    {
+      "name": "Mimi Fekade",
+      "loc": "",
+      "craft": "",
+      "bio": "",
+      "items": 32
+    },
+    {
+      "name": "Smell of Love Candles LLC",
+      "loc": "",
+      "craft": "",
+      "bio": "",
+      "items": 21
+    },
+    {
+      "name": "Dagmar Tawil",
+      "loc": "",
+      "craft": "",
+      "bio": "",
+      "items": 25
+    },
+    {
+      "name": "Circle Time Books LLC",
+      "loc": "",
+      "craft": "",
+      "bio": "",
+      "items": 30
+    },
+    {
+      "name": "Claudia Alvarez",
+      "loc": "",
+      "craft": "",
+      "bio": "",
+      "items": 25
+    },
+    {
+      "name": "Faith and Grace Co LLC",
+      "loc": "",
+      "craft": "",
+      "bio": "",
+      "items": 20
+    },
+    {
+      "name": "JustAlly LLC",
+      "loc": "",
+      "craft": "",
+      "bio": "",
+      "items": 21
+    },
+    {
+      "name": "Mola Creative Studio LLC",
+      "loc": "",
+      "craft": "",
+      "bio": "",
+      "items": 18
+    },
+    {
+      "name": "Vida Dulce Imports DBAKVZ Designs LLC",
+      "loc": "",
+      "craft": "",
+      "bio": "",
+      "items": 18
+    },
+    {
+      "name": "Sofia Cecilia Essence LLC",
+      "loc": "",
+      "craft": "",
+      "bio": "",
+      "items": 9
+    },
+    {
+      "name": "Neighborgoods LLC",
+      "loc": "",
+      "craft": "",
+      "bio": "",
+      "items": 13
+    },
+    {
+      "name": "Julie Gross",
+      "loc": "",
+      "craft": "",
+      "bio": "",
+      "items": 15
+    },
+    {
+      "name": "Mann Made Designs",
+      "loc": "",
+      "craft": "",
+      "bio": "",
+      "items": 12
+    },
+    {
+      "name": "Nancy Viso",
+      "loc": "",
+      "craft": "",
+      "bio": "",
+      "items": 11
+    },
+    {
+      "name": "Chic and Etnic LLC",
+      "loc": "",
+      "craft": "",
+      "bio": "",
+      "items": 11
+    },
+    {
+      "name": "Patsy Cahill",
+      "loc": "",
+      "craft": "",
+      "bio": "",
+      "items": 7
+    },
+    {
+      "name": "IndiBlossom LLC",
+      "loc": "",
+      "craft": "",
+      "bio": "",
+      "items": 6
+    },
+    {
+      "name": "Mimi Marchese",
+      "loc": "",
+      "craft": "",
+      "bio": "",
+      "items": 4
+    },
+    {
+      "name": "The Black Swan Company LLC",
+      "loc": "",
+      "craft": "",
+      "bio": "",
+      "items": 3
+    },
+    {
+      "name": "Patricia Guisandes",
+      "loc": "",
+      "craft": "",
+      "bio": "",
+      "items": 2
+    },
+    {
+      "name": "Liana Miranda",
+      "loc": "",
+      "craft": "",
+      "bio": "",
+      "items": 1
+    }
+  ]
+}
