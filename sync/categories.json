@@ -1,0 +1,30 @@
+{
+  "_comment": "STOPGAP. Ricochet's Category field is populated on 19 of 1606 rows, so category — the site's whole navigation — is derived here from the product name and short description. Rules are ORDERED and the first match wins, so form-factor is listed ahead of theme, and the key-ring rule sits above Jewelry so 'Key rings' does not read as a ring. A real Category in the export always beats these rules. Delete this file the day Ricochet's categories are filled in; the site loses nothing.",
+
+  "rules": [
+    { "category": "Accessories",          "match": ["keychain", "key chain", "key ring", "key rings", "keyring", "keyrings", "lanyard", "phone strap"] },
+    { "category": "Jewelry",              "match": ["earring", "earrings", "necklace", "necklaces", "bracelet", "bracelets", "stud", "studs", "pendant", "brooch", "anklet", "jewelry", "choker", "huayruro", "huayruros", "ring", "rings", "ear cuff", "cuff", "temblecuff"] },
+    { "category": "Magnets",              "match": ["magnet", "magnets"] },
+    { "category": "Prints & Wall Art",    "match": ["print", "prints", "matted", "framed", "frame", "watercolor", "poster", "canvas", "wall art", "artwork", "painting", "drawing", "drawings"] },
+    { "category": "Cards & Stationery",   "match": ["card", "cards", "greeting", "postcard", "notebook", "journal", "notepad", "sticker", "stickers", "bookmark", "stationery", "pen", "pens", "pencil"] },
+    { "category": "Books",                "match": ["book", "books", "box set"] },
+    { "category": "Candles & Fragrance",  "match": ["candle", "candles", "waxmelt", "wax melt", "diffuser", "difusser", "incense", "room spray", "linen spray", "mist"] },
+    { "category": "Bath & Body",          "match": ["soap", "lotion", "lip balm", "balm", "scrub", "body butter", "body milk", "body oil", "bath"] },
+    { "category": "Bags & Purses",        "match": ["bag", "bags", "purse", "tote", "pouch", "wallet", "clutch", "backpack", "crossbody"] },
+    { "category": "Accessories",          "match": ["bandana", "hat", "cap", "scarf", "headscarf", "headband", "hair clip", "hair claw", "claw", "scrunchie", "scrunchies", "barrette", "pin", "badge", "sunglasses", "mask", "collar", "belt"] },
+    { "category": "Apparel",              "match": ["shirt", "t-shirt", "tee", "hoodie", "jacket", "sweater", "sweatshirt", "pullover", "romper", "dress", "skirt", "socks", "slippers", "apron", "aprons", "onesie", "cardigan", "poncho", "shawl", "top"] },
+    { "category": "Kids & Toys",          "match": ["kids", "kid", "baby", "toy", "toys", "plush", "puzzle", "doll", "rattle", "crown", "paintme"] },
+    { "category": "Home & Kitchen",       "match": ["mug", "coaster", "coasters", "glass", "glasses", "tumbler", "bottle", "mirror", "sign", "signs", "tray", "ornament", "towel", "pillow", "blanket", "vase", "bowl", "plate", "spoon", "cup", "straw", "cutting board", "trivet", "coffee", "tea", "wine", "cake topper", "plant hanger", "plant hangers", "oven mitt", "oven mitts", "figurine", "figurines", "alebrijes", "talavera", "tissue box", "gnome", "bunny", "syrup"] },
+    { "category": "DC Souvenirs",         "match": ["washington", "capitol", "memorial", "monument", "cherry blossom", "smithsonian", "white house", "dmv", "d.c.", "souvenir"] }
+  ],
+
+  "_makerDefaultsComment": "Last resort, applied only when no keyword rule matched. Each of these is a JUDGEMENT CALL made from what the maker's other items classify as — confirm them with the shop before launch, especially Hector Zarate, whose unmatched SKUs are style codes (AP SCROLL, SUN35, CC HEXAGONAL) rather than words.",
+  "makerDefaults": {
+    "X40 Designs LLC": "Jewelry",
+    "Claudia Alvarez": "Jewelry",
+    "Nancy Viso": "Jewelry",
+    "Hector Zarate": "Jewelry",
+    "Violet Red Studio LLC": "Prints & Wall Art",
+    "Circle Time Books LLC": "Books"
+  }
+}

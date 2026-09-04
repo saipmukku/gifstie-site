@@ -1,0 +1,12 @@
+{
+  "name": "giftsie-catalog-sync",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Ricochet CSV export → giftsie site catalog feed. No dependencies.",
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "sync": "node sync.mjs",
+    "test": "node --test"
+  }
+}
